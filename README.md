@@ -1,6 +1,10 @@
-# later_app
+# Later App
 
-A new Flutter project.
+!!!This project is still under development!!!
+
+Later App is basically a YouTube Watch-Later list, but for websites and URLs
+- If you have a website you want to look into, but not now, then put it into the Later App. 
+- The app stores the website for future refernce, and when needed, the website can be opened in the browser. 
 
 ## Getting Started
 
