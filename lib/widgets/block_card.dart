@@ -9,7 +9,7 @@ class BlockCard extends StatelessWidget {
   BlockCard(this._recBlock, this._deleteBlock);
 
   void _launchUrl(Uri url, BuildContext context) async {
-    if (!await launchUrl(url)) {
+    if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
       throw 'Could not launch $url';
     }
   }

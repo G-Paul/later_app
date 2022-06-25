@@ -38,6 +38,7 @@ dependencies:
   sqflite: 
   path_provider: 
   intl: 
+  receive_sharing_intent:
 
 dev_dependencies:
   flutter_test:

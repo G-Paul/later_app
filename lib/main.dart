@@ -1,13 +1,16 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+// import 'package:flutter/services.dart';
 import 'package:later_app/models/database_helper.dart';
+import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 
 import './models/block.dart';
 import './widgets/block_list.dart';
 import './widgets/addNewLink.dart';
 
 void main() {
-  // WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   // SystemChrome.setPreferredOrientations([
   //   DeviceOrientation.portraitDown,
   //   DeviceOrientation.portraitUp,
@@ -72,14 +75,38 @@ class _MyHomePageState extends State<MyHomePage> {
   late List<Block> _userLinks;
   bool isLoading = false;
 
+  StreamSubscription? _dataStreamSubscription;
+  String sharedUrl = "";
+
   @override
   void initState() {
     super.initState();
+    _dataStreamSubscription = ReceiveSharingIntent.getTextStream().listen(
+      (String text) {
+        setState(() {
+          sharedUrl = text;
+        });
+        _startAddingNewLinkWithUrl(context);
+      },
+    );
+
+    ReceiveSharingIntent.getInitialText().then(
+      (String? text) {
+        if (text != null) {
+          setState(() {
+            sharedUrl = text;
+          });
+          _startAddingNewLinkWithUrl(context);
+        }
+      },
+    );
+
     refreshNotes();
   }
 
   @override
   void dispose() {
+    _dataStreamSubscription!.cancel();
     DatabaseHelper.instance.closedb();
     super.dispose();
   }
@@ -107,11 +134,19 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() => isLoading = false);
   }
 
+  void _startAddingNewLinkWithUrl(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (_) {
+          return NewLink.withUrl(_addNewLink, sharedUrl);
+        });
+  }
+
   void _startAddingNewLink(BuildContext context) {
     showModalBottomSheet(
         context: context,
         builder: (_) {
-          return NewLink(_addNewLink);
+          return NewLink.noUrl(_addNewLink);
         });
   }
 

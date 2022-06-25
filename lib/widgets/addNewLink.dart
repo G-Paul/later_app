@@ -3,7 +3,9 @@ import 'package:url_launcher/url_launcher.dart';
 
 class NewLink extends StatefulWidget {
   final Function addLink;
-  const NewLink(this.addLink);
+  late String? sharedUrl = "";
+  NewLink.noUrl(this.addLink);
+  NewLink.withUrl(this.addLink, this.sharedUrl);
 
   @override
   State<NewLink> createState() => _NewLinkState();
@@ -12,6 +14,22 @@ class NewLink extends StatefulWidget {
 class _NewLinkState extends State<NewLink> {
   final _titleController = TextEditingController();
   final _urlController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    String? url = widget.sharedUrl;
+    if (url != null) {
+      _urlController.text = url;
+    }
+  }
+
+  @override
+  void dispose() {
+    _urlController.dispose();
+    _titleController.dispose();
+    super.dispose();
+  }
 
   void _submitData() {
     final enteredTitle = _titleController.text;
