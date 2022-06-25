@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:later_app/models/database_helper.dart';
 
 import './models/block.dart';
 import './widgets/block_list.dart';
@@ -67,32 +68,42 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final List<Block> _userLinks = [
-    // Block(
-    //   id: 'l1',
-    //   title: 'Google',
-    //   url: 'https://www.google.co.in/',
-    //   date: DateTime.now(),
-    // ),
-    // Block(
-    //   id: 'l2',
-    //   title: 'YouTube video',
-    //   url: 'https://youtu.be/tqsy9Wtr1qE',
-    //   date: DateTime.now(),
-    // ),
-  ];
+  late List<Block> _userLinks;
+  bool isLoading = false;
 
-  void _addNewLink(String title, String url) {
+  @override
+  void initState() {
+    super.initState();
+    refreshNotes();
+  }
+
+  @override
+  void dispose() {
+    DatabaseHelper.instance.closedb();
+    super.dispose();
+  }
+
+  Future refreshNotes() async {
+    setState(() => isLoading = true);
+    this._userLinks = await DatabaseHelper.instance.readAllBlock();
+    setState(() => isLoading = false);
+  }
+
+  Future _addNewLink(String title, String url) async {
     final newLink = Block(
-      id: '${DateTime.now()}_${title}',
+      // id: 1, /////////////////////////////////////////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       title: title,
       url: url,
       date: DateTime.now(),
     );
-    setState(() {
-      _userLinks.add(newLink);
-      _userLinks.sort((a, b) => b.id.compareTo(a.id));
-    });
+    // setState(() {
+    //   _userLinks.add(newLink);
+    //   _userLinks.sort((a, b) => a.date.compareTo(a.date));
+    // });
+    setState(() => isLoading = true);
+    await DatabaseHelper.instance.insertBlock(newLink);
+    await refreshNotes();
+    setState(() => isLoading = false);
   }
 
   void _startAddingNewLink(BuildContext context) {
@@ -103,10 +114,14 @@ class _MyHomePageState extends State<MyHomePage> {
         });
   }
 
-  void _deleteLink(String id) {
-    setState(() {
-      _userLinks.removeWhere((element) => element.id == id);
-    });
+  Future _deleteLink(int id) async {
+    // setState(() {
+    //   _userLinks.removeWhere((element) => element.id == id);
+    // });
+    setState(() => isLoading = true);
+    await DatabaseHelper.instance.deleteBlock(id);
+    refreshNotes();
+    setState(() => isLoading = false);
   }
 
   @override
@@ -123,18 +138,22 @@ class _MyHomePageState extends State<MyHomePage> {
 
     return Scaffold(
       appBar: appBar,
-      body: Column(
-        children: [
-          Flexible(
-            flex: 1,
-            child: Container(
-              height: (MediaQuery.of(context).size.height -
-                  appBar.preferredSize.height -
-                  MediaQuery.of(context).padding.top),
-              child: BlockList(_userLinks, _deleteLink),
-            ),
-          ),
-        ],
+      body: Center(
+        child: isLoading
+            ? CircularProgressIndicator()
+            : Column(
+                children: [
+                  Flexible(
+                    flex: 1,
+                    child: Container(
+                      height: (MediaQuery.of(context).size.height -
+                          appBar.preferredSize.height -
+                          MediaQuery.of(context).padding.top),
+                      child: BlockList(_userLinks, _deleteLink),
+                    ),
+                  ),
+                ],
+              ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _startAddingNewLink(context),
