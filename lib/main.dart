@@ -139,6 +139,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     return Scaffold(
       appBar: appBar,
+      backgroundColor: Color.fromARGB(255, 247, 247, 247),
       body: Center(
         child: isLoading
             ? CircularProgressIndicator()
