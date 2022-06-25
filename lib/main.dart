@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Later App',
+      title: 'LATER APP',
       theme: ThemeData(
         primarySwatch: Colors.deepPurple,
         accentColor: Color.fromARGB(255, 255, 196, 0),
@@ -50,8 +50,9 @@ class MyApp extends StatelessWidget {
 
         appBarTheme: AppBarTheme(
           titleTextStyle: TextStyle(
-            fontFamily: 'OpenSans',
-            fontSize: 20,
+            fontFamily: 'Comfortaa',
+            fontSize: 19,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),

@@ -20,10 +20,14 @@ class BlockList extends StatelessWidget {
                 children: [
                   Text(
                     'No Link Added Yet!',
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(
+                        fontSize: 19,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Comfortaa'),
                   ),
+                  SizedBox(height: constraints.maxHeight * 0.05),
                   Container(
-                    height: constraints.maxHeight * 0.6,
+                    height: constraints.maxHeight * 0.4,
                     child: Image.asset('assets/images/empty_list_image.png',
                         fit: BoxFit.contain),
                   )
