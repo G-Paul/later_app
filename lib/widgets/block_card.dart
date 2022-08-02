@@ -16,53 +16,6 @@ class BlockCard extends StatelessWidget {
     }
   }
 
-  // @override
-  // Widget build(BuildContext context) {
-  //   return Card(
-  //     margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-  //     elevation: 6,
-  //     child: ListTile(
-  //       // leading: IconButton(
-  //       //   icon: ImageIcon(NetworkImage(
-  //       //     "https://www.google.com/s2/favicons?domain_url=${_recBlock.url}",
-  //       //   )),
-  //       //   iconSize: 40,
-  //       //   onPressed: () => _launchUrl(Uri.parse(_recBlock.url), context),
-  //       // ),
-  //       leading: InkWell(
-  //         onTap: () => _launchUrl(Uri.parse(_recBlock.url), context),
-  //         child: Image.network(
-  //           "https://www.google.com/s2/favicons?domain_url=${_recBlock.url}",
-  //           height: 60,
-  //           width: 40,
-  //           scale: 0.6,
-  //           errorBuilder: (context, error, stackTrace) {
-  //             return const Icon(Icons.public_outlined);
-  //           },
-  //         ),
-  //       ),
-  //       title: Text(
-  //         _recBlock.title,
-  //         style: Theme.of(context).textTheme.titleLarge,
-  //       ),
-  //       subtitle: Container(
-  //         height: 20,
-  //         alignment: Alignment.centerLeft,
-  //         child: FittedBox(
-  //             child: Text(
-  //                 _recBlock.url.length > 30
-  //                     ? '${_recBlock.url.substring(0, 30)}...'
-  //                     : _recBlock.url,
-  //                 style: Theme.of(context).textTheme.titleMedium)),
-  //       ),
-  //       trailing: IconButton(
-  //         icon:
-  //             Icon(Icons.delete_outlined, color: Theme.of(context).errorColor),
-  //         onPressed: () => _deleteBlock(_recBlock.id),
-  //       ),
-  //     ),
-  //   );
-  // }
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -219,3 +172,54 @@ class BlockCard extends StatelessWidget {
     );
   }
 }
+
+// Previous block card widget: 
+
+
+  // @override
+  // Widget build(BuildContext context) {
+  //   return Card(
+  //     margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+  //     elevation: 6,
+  //     child: ListTile(
+  //       // leading: IconButton(
+  //       //   icon: ImageIcon(NetworkImage(
+  //       //     "https://www.google.com/s2/favicons?domain_url=${_recBlock.url}",
+  //       //   )),
+  //       //   iconSize: 40,
+  //       //   onPressed: () => _launchUrl(Uri.parse(_recBlock.url), context),
+  //       // ),
+  //       leading: InkWell(
+  //         onTap: () => _launchUrl(Uri.parse(_recBlock.url), context),
+  //         child: Image.network(
+  //           "https://www.google.com/s2/favicons?domain_url=${_recBlock.url}",
+  //           height: 60,
+  //           width: 40,
+  //           scale: 0.6,
+  //           errorBuilder: (context, error, stackTrace) {
+  //             return const Icon(Icons.public_outlined);
+  //           },
+  //         ),
+  //       ),
+  //       title: Text(
+  //         _recBlock.title,
+  //         style: Theme.of(context).textTheme.titleLarge,
+  //       ),
+  //       subtitle: Container(
+  //         height: 20,
+  //         alignment: Alignment.centerLeft,
+  //         child: FittedBox(
+  //             child: Text(
+  //                 _recBlock.url.length > 30
+  //                     ? '${_recBlock.url.substring(0, 30)}...'
+  //                     : _recBlock.url,
+  //                 style: Theme.of(context).textTheme.titleMedium)),
+  //       ),
+  //       trailing: IconButton(
+  //         icon:
+  //             Icon(Icons.delete_outlined, color: Theme.of(context).errorColor),
+  //         onPressed: () => _deleteBlock(_recBlock.id),
+  //       ),
+  //     ),
+  //   );
+  // }
