@@ -47,6 +47,7 @@ class MyApp extends StatelessWidget {
           titleSmall: TextStyle(
               fontFamily: 'OpenSans',
               fontWeight: FontWeight.normal,
+              color: Color.fromARGB(255, 87, 87, 87),
               fontSize: 12),
         ),
         // buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
