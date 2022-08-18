@@ -11,6 +11,7 @@ Later App is basically a YouTube Watch-Later list, but for websites and URLs:
 - The URLs are stored as tiles, and clicking on the icon on the left side takes you to the corresponding website using the default browser of your device.
 - The URLs and related data are stored locally in your device. 
 - When done using the URL, delete it using the delete button on the right. 
+- Long tap on a card to copy the URL to device clipboard. 
 
 Technologies Used: 
 - Flutter and Dart for making the app. 
