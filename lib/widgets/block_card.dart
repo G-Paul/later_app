@@ -19,7 +19,8 @@ class BlockCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 5,
+      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      elevation: 0,
       child: Container(
         padding: EdgeInsets.all(5),
         child: Column(
